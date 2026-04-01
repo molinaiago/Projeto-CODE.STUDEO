@@ -1,0 +1,156 @@
+{
+  "slug": "avancada",
+  "titulo": "Trilha 3 — Avançada",
+  "descricao": "Abstração e problemas compostos: noção de complexidade, estratégias, busca/ordenação, strings e TADs.",
+  "modulos": [
+    {
+      "moduloId": "abs-complex",
+      "titulo": "Abstração e Complexidade",
+      "resumo": "Analise o problema, escolha uma estratégia e pense no custo (O(n), O(n log n), etc.).",
+      "atividades": [
+        {
+          "id": "adv-1",
+          "tipo": "code-js",
+          "titulo": "Máximo de um array (O(n))",
+          "enunciado": "Implemente **maximo(arr)** que retorna o maior número do array. Assuma um array não-vazio de números.",
+          "functionName": "maximo",
+          "starter": "function maximo(arr) {\n  // Estratégia linear: varrer o array guardando o maior visto\n  let m = arr[0];\n  for (let i = 1; i < arr.length; i++) {\n    if (arr[i] > m) m = arr[i];\n  }\n  return m;\n}\n",
+          "teoria": {
+            "titulo": "Custo linear",
+            "texto": "Varremos o array uma vez. Complexidade O(n): o tempo cresce proporcional ao tamanho do array.",
+            "codigo": "function maximo(arr) {\n  let m = arr[0];\n  for (let i = 1; i < arr.length; i++) if (arr[i] > m) m = arr[i];\n  return m;\n}"
+          },
+          "tests": [
+            { "args": [[3, 9, 1, 7]], "expect": 9 },
+            { "args": [[-5, -2, -9]], "expect": -2 },
+            { "args": [[10]], "expect": 10 }
+          ],
+          "hiddenTests": [
+            { "args": [[100, 99, 101, 100]], "expect": 101 }
+          ],
+          "timeoutMs": 1200
+        },
+        {
+          "id": "adv-2",
+          "tipo": "code-js",
+          "titulo": "Contar ocorrências (strings)",
+          "enunciado": "Implemente **contaOcorrencias(str, ch)** que retorna quantas vezes o caractere **ch** aparece em **str** (case sensitive).",
+          "functionName": "contaOcorrencias",
+          "starter": "function contaOcorrencias(str, ch) {\n  let c = 0;\n  for (let i = 0; i < str.length; i++) {\n    if (str[i] === ch) c++;\n  }\n  return c;\n}\n",
+          "teoria": {
+            "titulo": "Percorrendo strings",
+            "texto": "Strings em JS são indexáveis. Podemos varrer caractere a caractere e contar matches. O(n)."
+          },
+          "tests": [
+            { "args": ["banana", "a"], "expect": 3 },
+            { "args": ["abc", "x"], "expect": 0 },
+            { "args": ["Mississippi", "s"], "expect": 4 }
+          ],
+          "hiddenTests": [
+            { "args": ["aaaAA", "A"], "expect": 2 }
+          ],
+          "timeoutMs": 1200
+        }
+      ]
+    },
+    {
+      "moduloId": "busca-ordenacao",
+      "titulo": "Busca e Ordenação",
+      "resumo": "Implemente algoritmos clássicos e entenda quando usá-los.",
+      "atividades": [
+        {
+          "id": "adv-3",
+          "tipo": "code-js",
+          "titulo": "Ordenação por seleção (Selection Sort)",
+          "enunciado": "Implemente **selectionSort(arr)** que retorna **um novo array** com os mesmos elementos em ordem crescente.",
+          "functionName": "selectionSort",
+          "starter": "function selectionSort(arr) {\n  const a = arr.slice(); // não mutar o original\n  for (let i = 0; i < a.length - 1; i++) {\n    let min = i;\n    for (let j = i + 1; j < a.length; j++) {\n      if (a[j] < a[min]) min = j;\n    }\n    if (min !== i) {\n      const tmp = a[i]; a[i] = a[min]; a[min] = tmp;\n    }\n  }\n  return a;\n}\n",
+          "teoria": {
+            "titulo": "Selection Sort em poucas linhas",
+            "texto": "Procure o menor elemento do sufixo e troque com a posição corrente. Custo O(n²).",
+            "codigo": "function selectionSort(a){a=a.slice();for(let i=0;i<a.length-1;i++){let m=i;for(let j=i+1;j<a.length;j++)if(a[j]<a[m])m=j;[a[i],a[m]]=[a[m],a[i]]}return a}"
+          },
+          "tests": [
+            { "args": [[3, 1, 2]], "expect": [1, 2, 3] },
+            { "args": [[5, 5, 1]], "expect": [1, 5, 5] },
+            { "args": [[10]], "expect": [10] }
+          ],
+          "hiddenTests": [
+            { "args": [[9, -1, 0, 9]], "expect": [-1, 0, 9, 9] }
+          ],
+          "timeoutMs": 1500
+        },
+        {
+          "id": "adv-4",
+          "tipo": "code-js",
+          "titulo": "Busca binária (índice ou -1)",
+          "enunciado": "Implemente **buscaBinaria(arr, alvo)** que recebe **arr** já ordenado crescente e retorna o índice de **alvo** ou **-1** se não encontrado.",
+          "functionName": "buscaBinaria",
+          "starter": "function buscaBinaria(arr, alvo) {\n  let ini = 0, fim = arr.length - 1;\n  while (ini <= fim) {\n    const meio = Math.floor((ini + fim) / 2);\n    if (arr[meio] === alvo) return meio;\n    if (arr[meio] < alvo) ini = meio + 1; else fim = meio - 1;\n  }\n  return -1;\n}\n",
+          "teoria": {
+            "titulo": "Dividir para conquistar",
+            "texto": "A cada passo descartamos metade do array. Complexidade O(log n)."
+          },
+          "tests": [
+            { "args": [[1, 3, 5, 7, 9], 7], "expect": 3 },
+            { "args": [[1, 3, 5, 7, 9], 2], "expect": -1 },
+            { "args": [[10], 10], "expect": 0 }
+          ],
+          "hiddenTests": [
+            { "args": [[-5, -2, 0, 4, 9], -2], "expect": 1 }
+          ],
+          "timeoutMs": 1200
+        }
+      ]
+    },
+    {
+      "moduloId": "strings-tads",
+      "titulo": "Strings e Problemas Clássicos",
+      "resumo": "Trabalhe com normalização de texto e problemas famosos.",
+      "atividades": [
+        {
+          "id": "adv-5",
+          "tipo": "code-js",
+          "titulo": "Palíndromo (ignorando não-alfanuméricos)",
+          "enunciado": "Implemente **ehPalindromo(str)** que retorna **true** se **str** for palíndromo ao ignorar espaços, pontuação e diferenças de maiúsculas/minúsculas.",
+          "functionName": "ehPalindromo",
+          "starter": "function ehPalindromo(str) {\n  const norm = (str || \"\").toLowerCase().replace(/[^a-z0-9]/g, \"\");\n  for (let i = 0, j = norm.length - 1; i < j; i++, j--) {\n    if (norm[i] !== norm[j]) return false;\n  }\n  return true;\n}\n",
+          "teoria": {
+            "titulo": "Normalização",
+            "texto": "Remova caracteres não-alfanuméricos e compare extremos convergindo ao centro."
+          },
+          "tests": [
+            { "args": ["ovo"], "expect": true },
+            { "args": ["A grama é amarga"], "expect": true },
+            { "args": ["javascript"], "expect": false }
+          ],
+          "hiddenTests": [
+            { "args": ["Socorram-me, subi no ônibus em Marrocos!"], "expect": true }
+          ],
+          "timeoutMs": 1200
+        },
+        {
+          "id": "adv-6",
+          "tipo": "code-js",
+          "titulo": "Compressão simples (RLE)",
+          "enunciado": "Implemente **compressaoRLE(str)** que comprime sequências de caracteres repetidos. Ex.: \"aaabbc\" → \"a3b2c1\". Para string vazia, retorne \"\".",
+          "functionName": "compressaoRLE",
+          "starter": "function compressaoRLE(str) {\n  if (!str) return \"\";\n  let out = \"\";\n  let cnt = 1;\n  for (let i = 1; i <= str.length; i++) {\n    if (i < str.length && str[i] === str[i-1]) {\n      cnt++;\n    } else {\n      out += str[i-1] + String(cnt);\n      cnt = 1;\n    }\n  }\n  return out;\n}\n",
+          "teoria": {
+            "titulo": "Run-Length Encoding (RLE)",
+            "texto": "Agrupe runs de caracteres iguais e escreva caractere + contagem. Útil para entender compressão básica."
+          },
+          "tests": [
+            { "args": ["aaabbc"], "expect": "a3b2c1" },
+            { "args": ["aaaa"], "expect": "a4" },
+            { "args": [""], "expect": "" }
+          ],
+          "hiddenTests": [
+            { "args": ["abccccaaa"], "expect": "a1b1c4a3" }
+          ],
+          "timeoutMs": 1200
+        }
+      ]
+    }
+  ]
+}

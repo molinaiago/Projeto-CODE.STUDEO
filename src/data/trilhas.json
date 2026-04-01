@@ -1,0 +1,17 @@
+{
+  "basica": {
+    "slug": "basica",
+    "titulo": "Trilha 1 — Básica",
+    "descricao": "Fundamentos do pensamento computacional: algoritmo, lógica booleana, variáveis, decisão e repetição por contagem."
+  },
+  "intermediaria": {
+    "slug": "intermediaria",
+    "titulo": "Trilha 2 — Intermediária",
+    "descricao": "Estruturas e algoritmos clássicos: repetição condicional, vetores, matrizes, funções e teste de mesa."
+  },
+  "avancada": {
+    "slug": "avancada",
+    "titulo": "Trilha 3 — Avançada",
+    "descricao": "Abstração e problemas compostos: noção de complexidade, estratégias, busca/ordenação, strings e TADs."
+  }
+}

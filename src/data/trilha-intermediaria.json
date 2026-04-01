@@ -1,0 +1,36 @@
+{
+  "slug": "intermediaria",
+  "titulo": "Trilha 2 — Intermediária",
+  "descricao": "Exercícios com código JavaScript e testes automatizados.",
+  "modulos": [
+    {
+      "moduloId": "intro-js",
+      "titulo": "Funções em JavaScript",
+      "resumo": "Comece implementando funções e validando com testes.",
+      "atividades": [
+        {
+          "id": "int-1",
+          "tipo": "code-js",
+          "titulo": "Soma dois números",
+          "enunciado": "Implemente a função **soma(a, b)** que retorna a soma de dois números.",
+          "functionName": "soma",
+          "starter": "function soma(a, b) {\n  // escreva seu código aqui\n  return a + b;\n}\n",
+          "teoria": {
+            "titulo": "Como escrever uma função",
+            "texto": "Uma função em JS pode ser declarada como: function nome(params) { /* corpo */ }. Retorne com 'return'.",
+            "codigo": "function soma(a, b) {\n  return a + b;\n}\n"
+          },
+          "tests": [
+            { "args": [1, 2], "expect": 3 },
+            { "args": [-1, 4], "expect": 3 },
+            { "args": [3, 0], "expect": 3 }
+          ],
+            "hiddenTests": [
+              { "args": [10, 5], "expect": 15 }
+          ],
+          "timeoutMs": 1200
+        }
+      ]
+    }
+  ]
+}
